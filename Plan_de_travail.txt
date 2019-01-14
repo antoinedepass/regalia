@@ -1,0 +1,20 @@
+PLAN DE TRAVAIL
+1 - Énoncé:
+Projet "Regalia" (Système de diffusion et performance musicale acousmatique en temps réel par capture de mouvement)
+
+2 - Description:
+Ce système est constitué de deux dispositifs employés par un utilisateur afin d'exécuter une musique spatialisée en temps réel. L'exécution d'une composition par enclenchement de banques de son (et leur modification via des gels temporels, boucles et panoramisation) est déterminée par l'utilisateur grâce à un contrôleur appelé "l'orbe". Les paramètres de mouvement et de positionnement sont capturés par un ensemble de capteurs (le "sceptre") qui est manipulé par l'utilisateur afin de diffuser une musique dans l'espace. Le système sera utilisé dans un environnement de haut-parleurs disposés en cercle.
+
+3 - Analyses des besoins:
+Orbe: 
+Sceptre:
+
+
+4 - Recherche:
+5 - Modèle:
+Explication du modèle utilisé, soit comme inspiration, ou la mécanique exacte qui est recherchée dans le projet
+6 - Méthode:
+Explication en détail des différents fonctionnements désirés (tous les petits morceaux et mécaniques).
+7 - Implémentation:
+8 - Test et maintenance:
+Notes et traitement d'information du matériel créé (TESTER TOUT LE TEMPS, À CHAQUE NOUVEAU MORCEAU DE CODE)
