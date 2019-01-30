@@ -33,3 +33,12 @@ Le capteur de rotation envoie ses données à l'Arduino (Pré-programmé avec l'IDE 
 
 8 - Test et maintenance:
 Notes et traitement d'information du matériel créé (TESTER TOUT LE TEMPS, À CHAQUE NOUVEAU MORCEAU DE CODE)
+
+############### Commentaires ##################
+
+Excellent projet!
+
+Un petit commentaire... Ne serait-il pas plus simple d'exporter les séquences en fichiers audio et de faire la panoramisation directement dans Pyo. Ça éliminerait Max et Live du setup temps-réel et simplifierait le contrôle (pas besoin de faire communiquer pyo et max4live). Les séquences pourraient être pré-composées dans Live et les rendues simplement lus dans pyo... À réfléchir!
+
+10/10
+
