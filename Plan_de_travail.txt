@@ -7,38 +7,31 @@ Ce système est constitué de deux dispositifs employés par un utilisateur afin d'
 
 3 - Analyses des besoins:
 # Sceptre: Capteur d'orientation fixé sur un bâton. L'orientation est reliée au volume du son. C'est l'utilisateur qui le déplace pour panoramiser le son.
-# Orbe: Contrôleur midi/OSC (idéalement sans fil) qui se tient à une main.  Il a des touches effectuant des commandes différentes.
+# Orbe: Contrôleur HID.  Il a des touches effectuant des commandes différentes.
   - Gel de position: Crée une copie d'un paramètre de positionnement qui reste figé à cette valeur aussi longtemps que l'utilisateur le désire.
   -Gel d'orientation: Fige le paramètre d'orientation du sceptre, fixant ainsi le volume.
   -Boucle: Fait boucler le dernier mouvement effectué (ex: la dernière seconde) aussi longtemps que l'utilisateur le désire.
   -Enclenchement: Enclenche une section de pièce contenant des boucles prédéterminées. Il est aussi possible au sein de ces sections d'enclencher des sons individuellement.
   -Arrêt: Empêche le sceptre d'envoyer de l'information.
-#"Partition" numérique: Il s'agit d'une ensemble de séquences de sons qui peuvent être enclenchés par l'orbe. Ceux-ci sont organisés en grandes sections qui déterminent les grands mouvements de la pièce. Cette "partition" est pré-programmée dans un DAW comme Ableton Live.
+#"Partition" numérique: Ensemble de presets et de commandes qui permettent d'orchestrer le son et de déclencher les différents granulateurs du patch Max4Live.
 
 4 - Recherche: 
-#Sceptre: Le capteur d'orientation utilisé est le BNO055 d'Adafruit. Il sera relié à un microcontrôleur Arduino afin de recevoir les données.  La position du capteur sur l'axe horizontal permettra d'indiquer au programme dans Pyo vers quelle chaîne le son devra sortir.  La rotation vertical sera utilisée pour contrôler le volume. L'accéléromètre pourrait aussi éventuellement être utilisé pour rajouter une complexité au jeu.
-#Orbe: Il s'agit d'une manette tenue dans la main. La façon exacte dont elle peut être faite est variée, en autant qu'il soit possible de l'utiliser à une seule main et qu'elle comprenne au moins 5 ou 6 boutons. La manette est reliée elle aussi au Arduino afin de contrôler l'information qu'il reçoit.
-
+#Sceptre: Le capteur d'orientation utilisé est le BNO055 d'Adafruit. Il sera relié à un microcontrôleur Arduino afin de recevoir les données.  La position du capteur sur l'axe horizontal permettra d'indiquer à VBAP (dans Max4Live) vers quelle chaîne le son devra sortir.  La rotation vertical sera utilisée pour contrôler le volume.
+#Orbe: Il s'agit d'une manette de Wii tenue dans la main. Le mapping de ses boutons est fait via Max4Live, qui reçoit ses données en Bluetooth, puis en HID. Les commandes de la manette permettent de contrôler le flux de données du sceptre.
 5 - Modèle:
 Le modèle utilisé est celui d'une table de mixage traditionnellement utilisée en acousmatique. Il doit être possible pour Regalia de reproduire les mouvements normalement possibles sur ce dispositif mais dans les airs. La transposition du médium originel à ce genre de système par capture de mouvement introduit certaines restrictions, puisqu'il n'est possible d'allumer qu'un seul potentiomètre à la fois (le sceptre représentant le potentiomètre précis que l'on veut affecter et son orientation représentant la quantité de volume qu'on laisse passer). Ces restrictions sont amoindries par l'inclusion de l'orbe, qui permet de multilplier et d'altérer les comportements du sceptre afin de donner une liberté créatrice équivalente à celle de la table de mixage, mais avec l'aisance de la capture de mouvement.
 
 6 - Méthode:
 Un capteur d'orientation est fixé sur le sceptre tenu dans la main de l'utilisateur. L'information sur la position et l'orientation du capteur sont envoyés à un programme qui l'associe à la position d'un ou des hauts-parleurs. Si l'ordinateur reçoit l'information que le sceptre n'est plus à sa position verticale par défaut, il augmente le volume de sortie du ou des hauts-parleurs reliés à la position actuelle par rapport à l'ampleur de la rotation du sceptre. 
-L'orbe sert de manette pouvant jouer avec la réception de paramètres par l'ordinateur. Il peut "geler" la réception de nouveaux paramètres, les faire boucler, etc. Ses fonctions de modifications de paramètres sont reliés au programme lui-même, alors que ses fonctions de contrôle de la "partition" numérique sont reliées directement à Ableton Live.
+L'orbe sert de manette pouvant jouer avec la réception de paramètres par l'ordinateur. Il peut "geler" la réception de nouveaux paramètres, les faire boucler, etc. Ses fonctions de modifications de paramètres sont reliés au programme lui-même.
 
 7 - Implémentation:
-Les plateformes utilisées sont les suivantes: Pyo, Arduino IDE, Max et Ableton Live
-Le capteur de rotation envoie ses données à l'Arduino (Pré-programmé avec l'IDE d'Arduino) qui relaie son information au  même programme Pyo. Le programme Pyo analyse toutes les informations reçues (de position et d'amplitude) et les associe avec des channels pré-déterminées correspondant aux hauts-parleurs disposés en cercle. Ces informations peuvent tout au courant de la vie du programme être modifiées par l'orbe, qui peut actionner certaines routines modifiant le flux d'information. Toute l'information sortant de Pyo est dirigée vers Max, qui l'associe à la panoramisation et à l'amplitude directement dans Ableton Live (grâce à Max For Live). 
+Les plateformes utilisées sont les suivantes: Arduino IDE, Max4Live et Ableton Live
+Le capteur de rotation envoie ses données à l'Arduino (Pré-programmé avec l'IDE d'Arduino) qui relaie son information à Max4Live. Le patch Max4Live analyse toutes les informations reçues (de position et d'amplitude) et les associe avec des channels pré-déterminées correspondant aux hauts-parleurs disposés en cercle. Ces informations peuvent tout au courant de la vie du programme être modifiées par l'orbe, qui peut actionner certaines routines modifiant le flux d'information. Toute l'information reçue grâce à l'objet udpreceive est relayée à VBAP, qui les associe à la panoramisation et à l'amplitude. Elle sont aussi envoyées à un granulateur (conçu par Olivier Bélanger), qui permet de générer le son qui sort des haut-parleurs. Il est ainsi possible à la fois de modifier le son produit et l'endroit où ce sont est diffusé en temps réel.
 
 
 8 - Test et maintenance:
-Notes et traitement d'information du matériel créé (TESTER TOUT LE TEMPS, À CHAQUE NOUVEAU MORCEAU DE CODE)
+Processus mené à bien, avec très peu de bugs. Problèmes de CPU causés par le nombre d'instances présentes dans chaque objet poly à l'intérieur des granulateurs. Résolu en baissant le nombre d'instances de grains.
+Problèmes récurrents de connectivité durant le développement. Résolus grâce à l'utilisation d'un routeur afin de transférer les données de l'IMU, ainsi qu'un capteur Bluetooth 4.0 configuré pour fonctionner avec les stacks Bluetooth de Toshiba (il s'agit des seuls qui peuvent communiquer avec la manette de Wii en Bluetooth).
 
-############### Commentaires ##################
-
-Excellent projet!
-
-Un petit commentaire... Ne serait-il pas plus simple d'exporter les séquences en fichiers audio et de faire la panoramisation directement dans Pyo. Ça éliminerait Max et Live du setup temps-réel et simplifierait le contrôle (pas besoin de faire communiquer pyo et max4live). Les séquences pourraient être pré-composées dans Live et les rendues simplement lus dans pyo... À réfléchir!
-
-10/10
-
+Le programme fonctionne très bien et offre plusieurs issues de développement futur: orchestration plus poussée (programmation de nouveaux fonctionnements de la manette de Wii), meilleur mixage (compression/EQ multibandes), tests dans un environnement de haut-parleurs en dôme. Il serait aussi possible d'essayer l'instrument avec d'autres samples et sources sonores pour plus de variété. Les possibilités sont multiples.

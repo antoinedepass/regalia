@@ -3,4 +3,4 @@ DOCU DE RÉFÉRENCE:
 Notes sur la recherche esthétique du projet:
 - Mimu Gloves de Ariana Grande: fonctionnalité de gel/looping de notes assigné à un mouvement précis (bras tendu, en avant). Duplication de la source sonore (elle continue de chanter par dessus le loop). Axe horizontal assigné à la note tenue (plus on va vers la droite plus la note descend).
 - Gregory Beller (Babil-on): Je ne veux pas focuser sur un espace 3d autour de l'utilisateur qui soit nécessaire au mouvement. C'est-à-dire que je ne veux pas des conditions trop restrictives quant au mouvement des capteurs dans l'espace. La liberté est importante. Babil-on est un exemple d'une pièce qui à la fois est très libre d'approche pour sa chorégraphie mais à certains moments devient très restrictive avec ses mécaniques de tracking et d'enregistrement de mouvements en 3d.
-
+- Soundsaber à infrarouges de l'université d'Oslo: Bâtons à capture de mouvement qui viennent changer le son de manière très dynamique en temps réel.
